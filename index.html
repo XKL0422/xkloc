@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>謝昆霖 — 個人介紹</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;900&family=DM+Mono:wght@300;400&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:       #f7f5f2;
+      --bg2:      #efede9;
+      --surface:  #ffffff;
+      --border:   #e0dbd5;
+      --text:     #2a2520;
+      --text-mid: #6a6058;
+      --text-dim: #a09488;
+      --accent:   #4a6fa5;
+      --accent-s: rgba(74,111,165,0.08);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 7vw;
+      background: rgba(247,245,242,0.90);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Noto Serif TC', serif;
+      font-weight: 900;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.67rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 7vw;
+      padding-top: 80px;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 25%, rgba(74,111,165,0.07), transparent),
+        radial-gradient(ellipse 40% 40% at 15% 80%, rgba(74,111,165,0.04), transparent);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.6rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.1s;
+    }
+
+    .hero-name {
+      font-family: 'Noto Serif TC', serif;
+      font-weight: 900;
+      font-size: clamp(4.5rem, 13vw, 10.5rem);
+      line-height: 1;
+      letter-spacing: 0.1em;
+      color: var(--text);
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.3s;
+    }
+    .hero-name .name-accent { color: var(--accent); }
+
+    .hero-school {
+      font-size: 0.93rem;
+      color: var(--text-mid);
+      margin-bottom: 2.2rem;
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.5s;
+    }
+    .hero-school strong { color: var(--text); font-weight: 500; }
+
+    .hero-contacts {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.7s;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.42rem 1rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-mid);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .chip:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-s); }
+    .chip svg { width:13px; height:13px; flex-shrink:0; }
+
+    .hero-rule {
+      position: absolute;
+      bottom: 0; left: 7vw; right: 7vw;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* SECTIONS */
+    section { padding: 5.5rem 7vw; }
+    section + section { border-top: 1px solid var(--border); }
+
+    .s-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
+    }
+    .s-title {
+      font-family: 'Noto Serif TC', serif;
+      font-weight: 600;
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      color: var(--text);
+      margin-bottom: 2.8rem;
+    }
+
+    /* ABOUT */
+    .about-wrap {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 5rem;
+      align-items: start;
+    }
+    @media(max-width:820px){ .about-wrap { grid-template-columns:1fr; gap:2.5rem; } }
+
+    .about-text {
+      font-size: 0.98rem;
+      line-height: 2.1;
+      color: var(--text-mid);
+    }
+    .about-text p + p { margin-top: 1.1em; }
+    .about-text strong { color: var(--text); font-weight: 500; }
+    .about-text em { color: var(--accent); font-style: normal; font-weight: 500; }
+
+    .i-card {
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .i-card-head {
+      padding: 0.85rem 1.4rem;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .i-row {
+      display: flex;
+      gap: 1rem;
+      padding: 0.85rem 1.4rem;
+      border-bottom: 1px solid var(--border);
+      align-items: baseline;
+    }
+    .i-row:last-child { border-bottom: none; }
+    .i-k {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+      min-width: 52px;
+      flex-shrink: 0;
+      padding-top: 1px;
+    }
+    .i-v {
+      font-size: 0.86rem;
+      color: var(--text);
+      line-height: 1.6;
+      word-break: break-all;
+    }
+
+    /* SKILLS */
+    .skills-section { background: var(--bg2); }
+
+    .s-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .s-card {
+      background: var(--surface);
+      padding: 1.6rem;
+      transition: background 0.2s;
+    }
+    .s-card:hover { background: var(--bg); }
+    .s-icon {
+      width: 34px; height: 34px;
+      background: var(--accent-s);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.95rem;
+      margin-bottom: 0.9rem;
+    }
+    .s-name {
+      font-family: 'Noto Serif TC', serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+    .s-desc {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+    .s-bar { margin-top: 1.1rem; height: 2px; background: var(--border); }
+    .s-fill {
+      height: 100%;
+      background: var(--accent);
+      opacity: 0.45;
+      width: 0;
+      animation: grow 1.4s ease forwards;
+    }
+    @keyframes grow { to { width: var(--w); } }
+
+    /* CERTS */
+    .c-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--border);
+    }
+    .c-table thead tr { background: var(--bg2); }
+    .c-table th {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: 0.85rem 1.4rem;
+      text-align: left;
+      font-weight: 400;
+      border-bottom: 1px solid var(--border);
+    }
+    .c-table td {
+      padding: 1rem 1.4rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .c-table tr:last-child td { border-bottom: none; }
+    .c-table tbody tr { transition: background 0.15s; }
+    .c-table tbody tr:hover { background: var(--bg2); }
+
+    .c-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--text-dim); width: 44px; }
+    .c-name { font-size: 0.9rem; font-weight: 500; color: var(--text); }
+    .c-sub  { font-size: 0.75rem; color: var(--text-dim); margin-top: 0.12rem; }
+    .c-tag  {
+      display: inline-block;
+      padding: 0.18rem 0.6rem;
+      border: 1px solid var(--border);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      color: var(--text-mid);
+    }
+
+    @media(max-width:600px){
+      .c-table th:last-child, .c-table td:last-child { display: none; }
+      .nav-links { display: none; }
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 2.2rem 7vw;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .f-name {
+      font-family: 'Noto Serif TC', serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .f-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+    }
+
+    /* ANIM */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(18px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .reveal { opacity:0; transform:translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.in { opacity:1; transform:translateY(0); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">謝昆霖</div>
+  <ul class="nav-links">
+    <li><a href="#about">關於</a></li>
+    <li><a href="#skills">技能</a></li>
+    <li><a href="#certs">證照</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">智慧自動化工程 · AI 學習者</div>
+  <h1 class="hero-name">謝 <span class="name-accent">昆霖</span></h1>
+  <div class="hero-school">
+    <strong>國立勤益科技大學</strong> · 智慧自動化工程系 三年級
+  </div>
+  <div class="hero-contacts">
+    <a href="tel:0975766623" class="chip">
+      <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
+      </svg>
+      0975-766-623
+    </a>
+    <a href="mailto:teklin0422@gmail.com" class="chip">
+      <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+      </svg>
+      teklin0422@gmail.com
+    </a>
+  </div>
+  <div class="hero-rule"></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="s-label">01 — About</div>
+  <h2 class="s-title reveal">關於我</h2>
+  <div class="about-wrap">
+    <div class="about-text reveal">
+      <p>
+        我是<strong>謝昆霖</strong>，目前就讀於<strong>國立勤益科技大學智慧自動化工程系</strong>三年級。在求學過程中，我對<em>人工智慧</em>領域產生了深厚的熱情，並持續投入自學與實踐。
+      </p>
+      <p>
+        無論是機器學習的演算法原理、深度神經網路的架構設計，還是 AI 模型在自動化工程中的實際落地，我都抱持高度的好奇心積極鑽研。我相信 AI 不僅是一種工具，更是重塑產業思維的核心動力。
+      </p>
+      <p>
+        除了 AI，我也在 <em>PLC 程式設計</em> 與 <em>LabVIEW</em> 圖形化開發上累積扎實的實務基礎，擅長將軟體邏輯與硬體控制整合，致力成為橫跨智慧軟體與自動化硬體的<strong>複合型工程師</strong>。
+      </p>
+      <p>
+        我享受在動手實作中找到問題的解決路徑，每一個挑戰都是讓自己成長的養分。
+      </p>
+    </div>
+    <div class="i-card reveal">
+      <div class="i-card-head">個人資訊</div>
+      <div class="i-row"><span class="i-k">姓名</span><span class="i-v">謝昆霖</span></div>
+      <div class="i-row"><span class="i-k">學校</span><span class="i-v">國立勤益科技大學</span></div>
+      <div class="i-row"><span class="i-k">科系</span><span class="i-v">智慧自動化工程系</span></div>
+      <div class="i-row"><span class="i-k">年級</span><span class="i-v">三年級</span></div>
+      <div class="i-row"><span class="i-k">電話</span><span class="i-v">0975-766-623</span></div>
+      <div class="i-row"><span class="i-k">Email</span><span class="i-v">teklin0422@gmail.com</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-section">
+  <div class="s-label">02 — Skills</div>
+  <h2 class="s-title reveal">專業技能</h2>
+  <div class="s-grid reveal">
+    <div class="s-card">
+      <div class="s-icon">🤖</div>
+      <div class="s-name">人工智慧 / 機器學習</div>
+      <div class="s-desc">積極探索 AI 演算法與深度學習，專注於智慧工程場域的實務應用。</div>
+      <div class="s-bar"><div class="s-fill" style="--w:78%"></div></div>
+    </div>
+    <div class="s-card">
+      <div class="s-icon">⚙️</div>
+      <div class="s-name">PLC 程式設計</div>
+      <div class="s-desc">熟悉可程式邏輯控制器程式撰寫，能規劃自動化機台控制與生產流程。</div>
+      <div class="s-bar"><div class="s-fill" style="--w:85%"></div></div>
+    </div>
+    <div class="s-card">
+      <div class="s-icon">📊</div>
+      <div class="s-name">LabVIEW</div>
+      <div class="s-desc">運用圖形化程式設計進行量測、資料擷取與儀器控制，整合感測器訊號分析。</div>
+      <div class="s-bar"><div class="s-fill" style="--w:80%"></div></div>
+    </div>
+    <div class="s-card">
+      <div class="s-icon">📐</div>
+      <div class="s-name">3D 建模設計</div>
+      <div class="s-desc">具備 SOLIDWORKS 專業認證（CSWP），能進行精密零件建模與工程圖繪製。</div>
+      <div class="s-bar"><div class="s-fill" style="--w:83%"></div></div>
+    </div>
+    <div class="s-card">
+      <div class="s-icon">🔩</div>
+      <div class="s-name">氣壓 / 機電整合</div>
+      <div class="s-desc">精通氣壓迴路設計與機電整合，具備完整工業自動化設備實作能力。</div>
+      <div class="s-bar"><div class="s-fill" style="--w:88%"></div></div>
+    </div>
+    <div class="s-card">
+      <div class="s-icon">🖥️</div>
+      <div class="s-name">電腦硬體整合</div>
+      <div class="s-desc">熟悉水冷散熱系統架構，擁有 WCCT 國際認證，掌握高效能電腦組建技術。</div>
+      <div class="s-bar"><div class="s-fill" style="--w:72%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<section id="certs">
+  <div class="s-label">03 — Certifications</div>
+  <h2 class="s-title reveal">檢定證照</h2>
+  <table class="c-table reveal">
+    <thead>
+      <tr>
+        <th style="width:44px">#</th>
+        <th>證照名稱</th>
+        <th style="width:90px">等級</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="c-num">01</td>
+        <td>
+          <div class="c-name">氣壓乙級技術士</div>
+          <div class="c-sub">氣壓控制系統規劃與實作</div>
+        </td>
+        <td><span class="c-tag">乙級</span></td>
+      </tr>
+      <tr>
+        <td class="c-num">02</td>
+        <td>
+          <div class="c-name">機電整合丙級技術士</div>
+          <div class="c-sub">機械與電控整合系統操作</div>
+        </td>
+        <td><span class="c-tag">丙級</span></td>
+      </tr>
+      <tr>
+        <td class="c-num">03</td>
+        <td>
+          <div class="c-name">FPIC 國際認證</div>
+          <div class="c-sub">圓控式程式設計軟體初級</div>
+        </td>
+        <td><span class="c-tag">國際</span></td>
+      </tr>
+      <tr>
+        <td class="c-num">04</td>
+        <td>
+          <div class="c-name">WCCT 國際認證</div>
+          <div class="c-sub">水冷式電腦技術初級</div>
+        </td>
+        <td><span class="c-tag">國際</span></td>
+      </tr>
+      <tr>
+        <td class="c-num">05</td>
+        <td>
+          <div class="c-name">CSWP — Certified SOLIDWORKS Professional</div>
+          <div class="c-sub">SolidWorks 專業認證工程師</div>
+        </td>
+        <td><span class="c-tag">專業</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <div class="f-name">謝昆霖</div>
+  <div class="f-note">國立勤益科技大學 · 智慧自動化工程系 · © 2025</div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('in'), i * 70);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
